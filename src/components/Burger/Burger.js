@@ -14,7 +14,7 @@ const burger = (props) => {
       return arr.concat(el);
     }, []);
   if (transformedIngredients.length === 0) {
-    transformedIngredients = <p>Please start addingg ingredients!</p>;
+    transformedIngredients = <p>the burger aint gonna make itself!</p>;
   }
 
   return (
@@ -25,5 +25,5 @@ const burger = (props) => {
     </div>
   );
 };
-
+ 
 export default burger;
