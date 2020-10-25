@@ -35,8 +35,9 @@ class BurgerBuilder extends Component {
       .get('https://react-hamburger-cfcf0.firebaseio.com/Ingredients.json')
       .then((response) => {
         this.setState({ ingredients: response.data });
-      }).catch(error => {
-        this.setState({error: true})
+      })
+      .catch((error) => {
+        this.setState({ error: true });
       });
   }
 
@@ -91,30 +92,21 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    // alert('You continue!');
-    this.setState({ loading: true });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Rob Redlihcs',
-        address: {
-          street: 'Teststreet 1',
-          zipCode: '1132Wk',
-          country: 'the Netherlands',
-        },
-        email: 'test@test.com',
-      },
-      deliveryMethod: 'fastest',
-    };
-    axios
-      .post('/orders.json', order)
-      .then((response) => {
-        this.setState({ loading: false, purchasing: false });
-      })
-      .catch((error) => {
-        this.setState({ loading: false, purchasing: false });
-      });
+
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          '=' +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+    queryParams.push('price=' + this.state.totalPrice);
+    const queryString = queryParams.join ('&');
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryString,
+    });
   };
 
   render() {
@@ -126,8 +118,12 @@ class BurgerBuilder extends Component {
     }
 
     let orderSummary = null;
-    let burger = this.state.error ? <p>Ingredients cant be loaded!</p> : <Spinner />;
-    
+    let burger = this.state.error ? (
+      <p>Ingredients cant be loaded!</p>
+    ) : (
+      <Spinner />
+    );
+
     if (this.state.ingredients) {
       burger = (
         <Auxiliary>
@@ -142,14 +138,14 @@ class BurgerBuilder extends Component {
           />
         </Auxiliary>
       );
-      orderSummary = 
+      orderSummary = (
         <OrderSummary
           ingredients={this.state.ingredients}
           price={this.state.totalPrice}
           purchaseCancelled={this.purchaseCancelHandler}
           purchaseContinued={this.purchaseContinueHandler}
         />
-      ;
+      );
     }
     if (this.state.loading) {
       orderSummary = <Spinner />;
