@@ -11,8 +11,10 @@ https://thegrandburger.web.app/
 
 1) Download Visual Studio Code and go to your terminal.
 2) Download Node JS
-3) Run "yarn install" in the extracted folder
-4) Run "yarn start" to view the project
+3) Enter your Firebase project ID into the .firebaserc file before deploying
+4) Adjust the correct firebase link in the 'store/actions/burgerBuilder' and 'axios-orders' components.
+5) Run "yarn install" in the extracted folder
+6) Run "yarn start" to view the project
 
  Type  *yarn install* and *yarn start* in your terminal to create your own local server in Visual Studio Code.
 
@@ -22,8 +24,8 @@ This is my first React app created for practicing purposes. I built this app by 
 
 ## Credits
 
-*Maximilian Schwarzmuller of Academind - instructor
-Rob Schilder - student*
+*Maximilian Schwarzmuller of Academind - instructor*
+*Rob Schilder - student*
  
 
 
