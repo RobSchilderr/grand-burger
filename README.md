@@ -25,6 +25,7 @@ This is my first React app created for practicing purposes. I built this app by 
 ## Credits
 
 *Maximilian Schwarzmuller of Academind - instructor*
+
 *Rob Schilder - student*
  
 
